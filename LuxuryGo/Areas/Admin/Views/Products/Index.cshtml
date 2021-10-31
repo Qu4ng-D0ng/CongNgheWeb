@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LuxuryGo.Models.Entities.Student>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<div class="box">
+    <div class="box-body">
+        <table class="table table-bordered table-striped datatable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HoTen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NgaySinh)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.QueQuan)
+                    </th>
+                    
+                   
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                      
+                      
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgaySinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.QueQuan)
+                        </td>
+                    
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaSV }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaSV }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaSV })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

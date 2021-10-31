@@ -1,0 +1,101 @@
+﻿@model LuxuryGo.Models.ApplicationUser
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@{
+
+    ViewBag.Title = "Sửa quyền";
+
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+
+
+}
+
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <h2>@ViewBag.Title</h2>
+
+        <hr />
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Quyền</th>
+
+                    <th></th>
+
+                </tr>
+
+            </thead>
+           
+            <tbody>
+                @{
+                    var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                    var userRoles = userManager.GetRoles(Model.Id);
+
+                    bool isAdmin = false;
+
+                    foreach (var item in userRoles)
+                    {
+                        isAdmin = true;
+                        <tr>
+                            <td>@item.ToString()</td>
+                            <td>
+
+                                <form action="@Url.Action("DeleteRoleFromUserAsync", new { UserId = Model.Id, RoleName = @item.ToString() })" method="post">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit" class="btn btn-xs btn-danger">Gỡ bỏ</button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    }
+                    if (isAdmin == false)
+
+                    {
+                        <tr>
+
+                            <td colspan="2">
+
+                                <p>Thành viên chưa có quyền nào</p>
+
+                            </td>
+
+                        </tr>
+                    } }
+            </tbody>
+
+        </table>
+
+        <h5><strong>Thêm quyền cho thành viên này:</strong></h5>
+
+        <form action="@Url.Action("AddToRole")" method="post">
+
+            <input type="hidden" name="UserId" value="@Url.RequestContext.RouteData.Values["Id"]" />
+
+            @Html.AntiForgeryToken()
+
+            @Html.ListBox("RoleId", null, new { @class = "form-control", multiple = "multiple" })
+
+            <div class="form-group">
+
+                <br />
+
+                <button type="submit" class="btn btn-primary">Thêm </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

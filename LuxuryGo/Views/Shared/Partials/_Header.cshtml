@@ -1,0 +1,494 @@
+﻿@using LuxuryGo.Models.Entities
+@using LuxuryGo.Models
+@using Microsoft.AspNet.Identity;
+@model IEnumerable<LuxuryGo.Models.Entities.Product>
+
+<!-- Banner Top -->
+@if (ViewBag.BannerTop != null)
+{
+    <div id="BannerTop" class="text-center">
+        @Html.Raw(ViewBag.BannerTop.Content)
+    </div>
+}
+
+
+<div class="eshop-header">
+    <!-- SPOTLIGHT 2 -->
+    <div class="container">
+        <!-- SPOTLIGHT -->
+        <div class="t3-spotlight t3-eshop-header  row">
+            <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                <div class="t3-module module " id="Mod90">
+                    <div class="module-inner">
+                        <div class="module-ct">
+                            <div id="currency" class="eshop-currency">
+                                <a class="active" title="Follow Us">
+                                    Follow Us
+                                </a>
+                                <a href="https://www.facebook.com/140120abcxyz/" title="facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 hidden-xs">
+                @if (!Request.IsAuthenticated)
+                {
+                    @Html.Action("_LoginForm", "Account")
+                }
+                <div class="t3-module module " id="Mod1">
+                    <div class="module-inner">
+                        <div class="module-ct">
+                            <ul class="nav  nav-pills  nav-pills">
+                                <li class="item-108"><a href="@Url.RouteUrl("ShopingCart")"><i class="fa fa-shopping-bag"></i> Giỏ hàng</a></li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li class="item-107 top-bar__item nav-cart">
+                                        <a href="@Url.RouteUrl("AccountManageIndex")">
+                                            @{
+                                                var userId = System.Web.HttpContext.Current.User.Identity.Name;
+                                            }
+                                            <i class="fa fa-user"></i> @userId
+                                        </a>
+                                        <div class="nav-cart__dropdown">
+                                            <div class="nav-cart__items">
+
+                                                <div class="nav-cart__item clearfix">
+                                                    @{
+                                                        <a href="/quan-ly-tai-khoan/thong-tin" class="btn btn-success">
+                                                            <i class="fa fa-info" aria-hidden="true"></i> Thông tin tài khoản
+                                                        </a>
+                                                    }
+                                                </div>
+
+                                                <div class="nav-cart__item clearfix">
+                                                    <a href="/quan-ly-tai-khoan/doi-mat-khau" class="btn btn-success">
+                                                        <i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu
+                                                    </a>
+                                                </div>
+
+
+
+                                            </div> <!-- end cart items -->
+
+
+                                            <div class="nav-cart__item clearfix">
+                                                @{
+                                                    <a href="/don-hang/danh-sach-don-hang" class="btn btn-success">
+                                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Danh sách đơn hàng
+                                                    </a>
+                                                }
+                                            </div>
+
+                                            <div class="nav-cart__item clearfix">
+                                                @{
+                                                    <a href="@Url.Action("LogOff", "Account")" class="btn btn-success">
+                                                        <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                                                    </a>
+                                                }
+                                            </div>
+
+                                            <style>
+                                                -------------------------------------------------------*/
+                                                .nav-cart {
+                                                    position: relative;
+                                                    z-index: 1000;
+                                                }
+
+                                                .nav-cart__dropdown {
+                                                    opacity: 0;
+                                                    visibility: hidden;
+                                                    min-width: 270px;
+                                                    max-width: 300px;
+                                                    z-index: 10000;
+                                                    position: absolute;
+                                                    top: 100%;
+                                                    left: auto;
+                                                    right: -15px;
+                                                    background-color: #1a1a1a;
+                                                    padding: 20px;
+                                                    line-height: 1;
+                                                    text-align: left;
+                                                    -webkit-transition: all 0.3s ease-in-out;
+                                                    -moz-transition: all 0.3s ease-in-out;
+                                                    -ms-transition: all 0.3s ease-in-out;
+                                                    -o-transition: all 0.3s ease-in-out;
+                                                    transition: all 0.3s ease-in-out;
+                                                }
+
+                                                    .nav-cart__dropdown:before {
+                                                        content: '';
+                                                        position: absolute;
+                                                        width: 50px;
+                                                        height: 13px;
+                                                        display: block;
+                                                        top: -10px;
+                                                        right: 17px;
+                                                    }
+
+                                                .nav-cart__items {
+                                                    position: relative;
+                                                }
+
+                                                .nav-cart__item {
+                                                    margin-top: 15px;
+                                                    padding-bottom: 15px;
+                                                    border-bottom: 1px solid #353535;
+                                                    position: relative;
+                                                }
+
+                                                    .nav-cart__item:first-child {
+                                                        margin-top: 0;
+                                                    }
+
+                                                .nav-cart__img {
+                                                    float: left;
+                                                    margin-right: 20px;
+                                                }
+
+                                                .nav-cart__price {
+                                                    color: #c1c1c1;
+                                                    font-size: 13px;
+                                                    margin-top: 5px;
+                                                }
+
+                                                .nav-cart__title {
+                                                    position: relative;
+                                                    overflow: hidden;
+                                                    margin-right: 30px;
+                                                }
+
+                                                    .nav-cart__title > a {
+                                                        position: relative;
+                                                        color: #fff;
+                                                        font-size: 14px;
+                                                        vertical-align: top;
+                                                        line-height: 1.5;
+                                                    }
+
+                                                        .nav-cart__title > a:hover {
+                                                            color: #fff;
+                                                        }
+
+                                                .nav-cart__remove {
+                                                    font-size: 20px;
+                                                    position: absolute;
+                                                    right: 0;
+                                                    top: 0;
+                                                    background-color: #383838;
+                                                }
+
+                                                    .nav-cart__remove a {
+                                                        width: 20px;
+                                                        height: 20px;
+                                                        line-height: 20px;
+                                                        text-align: center;
+                                                        display: block;
+                                                        color: #c1c1c1;
+                                                    }
+
+                                                    .nav-cart__remove i {
+                                                        font-size: 16px;
+                                                    }
+
+                                                    .nav-cart__remove:hover {
+                                                        background-color: #ec2424;
+                                                    }
+
+                                                        .nav-cart__remove:hover i {
+                                                            color: #fff;
+                                                        }
+
+                                                .nav-cart__summary {
+                                                    margin-top: 10px;
+                                                    font-weight: 700;
+                                                    color: #fff;
+                                                    font-size: 14px;
+                                                }
+
+                                                .nav-cart__total-price {
+                                                    float: right;
+                                                }
+
+                                                .nav-cart__actions a {
+                                                    width: 100%;
+                                                    color: #fff;
+                                                }
+
+                                                    .nav-cart__actions a:first-child {
+                                                        color: #000000;
+                                                    }
+
+                                                    .nav-cart__actions a:hover {
+                                                        color: #fff;
+                                                    }
+
+                                                .nav-cart:hover .nav-cart__dropdown {
+                                                    opacity: 1;
+                                                    visibility: visible;
+                                                }
+
+                                                .nav__mobile-cart,
+                                                .nav__mobile-wishlist {
+                                                    color: #fff;
+                                                    font-size: 18px;
+                                                }
+
+                                                    .nav__mobile-cart:hover,
+                                                    .nav__mobile-wishlist:hover {
+                                                        color: #fff;
+                                                    }
+
+                                                .nav__mobile-cart-amount {
+                                                    font-size: 16px;
+                                                }
+
+                                                .nav__mobile-wishlist {
+                                                    margin-right: 18px;
+                                                }
+
+                                                .nav-cart__summary {
+                                                    margin-top: 10px;
+                                                    font-weight: 700;
+                                                    color: #fff;
+                                                    font-size: 14px;
+                                                }
+
+                                                .nav-cart__total-price {
+                                                    float: right;
+                                                }
+
+                                                .nav-cart__actions a {
+                                                    width: 100%;
+                                                    color: #fff;
+                                                }
+
+                                                    .nav-cart__actions a:first-child {
+                                                        color: #000000;
+                                                    }
+
+                                                    .nav-cart__actions a:hover {
+                                                        color: #fff;
+                                                    }
+
+                                                .nav-cart:hover .nav-cart__dropdown {
+                                                    opacity: 1;
+                                                    visibility: visible;
+                                                }
+
+
+                                                .mt-20 {
+                                                    margin-top: 20px;
+                                                }
+
+                                                .btn:hover {
+                                                    color: #fff;
+                                                    background-color: #ec2424;
+                                                    border-color: transparent;
+                                                }
+
+                                                .btn:focus {
+                                                    outline: none;
+                                                    color: #fff;
+                                                }
+
+                                                .btn-lg, .btn-lg.btn-button {
+                                                    font-size: 16px;
+                                                    padding: 0 30px;
+                                                }
+
+                                                    .btn-lg span, .btn-lg.btn-button span {
+                                                        line-height: 52px;
+                                                    }
+
+                                                    .btn-lg i, .btn-lg.btn-button i {
+                                                        font-size: 16px;
+                                                        margin-right: 4px;
+                                                    }
+
+                                                    .btn-lg.btn-button {
+                                                        height: 54px;
+                                                    }
+
+                                                .btn-md, .btn-md.btn-button {
+                                                    font-size: 13px;
+                                                    padding: 0 20px;
+                                                }
+
+                                                    .btn-md span, .btn-md.btn-button span {
+                                                        line-height: 43px;
+                                                    }
+
+                                                    .btn-md.btn-button {
+                                                        height: 45px;
+                                                    }
+
+                                                .btn-sm, .btn-sm.btn-button {
+                                                    font-size: 11px;
+                                                    padding: 0 20px;
+                                                    line-height: 28px;
+                                                }
+
+                                                    .btn-sm.btn-button {
+                                                        height: 30px;
+                                                    }
+
+                                                .btn-color {
+                                                    background-color: #ec2424;
+                                                }
+
+                                                    .btn-color:hover {
+                                                        background-color: #000 !important;
+                                                    }
+
+                                                .btn-transparent {
+                                                    background-color: transparent;
+                                                    border: 1px solid #fff;
+                                                }
+
+                                                .btn-stroke {
+                                                    color: #000000;
+                                                    border: 1px solid #e1e1e1;
+                                                    background-color: transparent;
+                                                }
+
+                                                .btn-dark {
+                                                    background-color: #000000;
+                                                }
+
+                                                .btn-white {
+                                                    background-color: #fff;
+                                                    color: #000000;
+                                                }
+
+                                                .btn-light {
+                                                    background-color: #f7f7f7;
+                                                    color: #000000;
+                                                }
+
+                                                .btn-white:focus, .btn-stroke:focus, .btn-transparent:focus {
+                                                    color: #000000;
+                                                }
+                                            </style>
+
+                                        </div>
+                                    </li>
+
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SPOTLIGHT -->
+    </div>
+    <!-- //SPOTLIGHT 2 -->
+</div>
+<header id="t3-header" class="container t3-header">
+    <div class="row">
+        <!-- LOGO -->
+        <div class="col-xs-12 col-sm-4 logo">
+            <div class="logo-image">
+                <a href="/" title="LuxuryGo - Lựa chọn cho phong cách!">
+                    <img class="logo-img img-responsive" src="~/Content/images/logo-LuxuryGo.png" alt="LuxuryGo - Lựa chọn cho phong cách!" />
+                    <span>LuxuryGo - Lựa chọn cho phong cách!</span>
+                </a>
+                <small class="site-slogan"></small>
+            </div>
+        </div>
+        <!-- //LOGO -->
+
+        <div class="col-xs-12 col-sm-8">
+            <div class="eshop-header-2">
+                <!-- SPOTLIGHT -->
+                <div class="t3-spotlight t3-eshop-header2  row">
+                    <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="t3-module module " id="Mod95">
+                            <div class="module-inner">
+                                <div class="module-ct">
+
+                                    <div class="custom">
+                                        <h2>0866-194-744</h2>
+                                        <p>Hotline đặt hàng 24/7 (8H-20H)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        @Html.Action("_HeaderSearchForm", "Product")
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        @Html.Action("_MiniCart", "Cart")
+                    </div>
+                </div>
+                <!-- SPOTLIGHT -->
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<!-- Need this wrapper for off-canvas menu. Remove if you don't use of-canvas -->
+<!-- MAIN NAVIGATION -->
+<nav id="t3-mainnav" class="wrap navbar nav-default-class navbar-default t3-mainnav">
+    <div class="container">
+        <div class="relative-wrap">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".t3-navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="t3-navbar-collapse navbar-collapse collapse"></div>
+
+            <div class="logo-image">
+                <a href="/" title="LuxuryGo - Lựa chọn cho phong cách!">
+                    <img class="logo-img img-responsive" src="~/Content/images/logo-LuxuryGo.png" alt="LuxuryGo - Lựa chọn cho phong cách!" />
+                    <span>LuxuryGo - Lựa chọn cho phong cách!</span>
+                </a>
+                <small class="site-slogan"></small>
+            </div>
+
+            <div class="t3-navbar navbar-collapse collapse">
+
+                <button class="btn btn-primary off-canvas-toggle " type="button" data-pos="left" data-nav="#t3-off-canvas" data-effect="off-canvas-effect-4">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- OFF-CANVAS SIDEBAR -->
+                <div id="t3-off-canvas" class="t3-off-canvas ">
+                    <div class="t3-off-canvas-header">
+                        <h2 class="t3-off-canvas-header-title">LuxuryGo Menu</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="t3-off-canvas-body">
+                        <div class="t3-module module " id="Mod141">
+                            <div class="module-inner">
+                                <div class="module-ct">
+                                    @Html.Action("_MobileMenu", "Menu")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- //OFF-CANVAS SIDEBAR -->
+
+                <div class="t3-megamenu animate fading" data-duration="400" data-responsive="true">
+                    @Html.Action("_MainMenu", "Menu")
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- //MAIN NAVIGATION -->
+<!-- slideshow -->

@@ -1,0 +1,70 @@
+﻿@using LuxuryGo.Models;
+
+@model IEnumerable<ApplicationUser>
+
+@{
+
+    ViewBag.Title = "Quản lý thành viên";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+
+}
+
+
+<div class="box">
+    <div class="box-body">
+        <table class="table table-bordered table-striped datatable">
+            <thead>
+
+                <tr>
+
+                    <th>Họ tên</th>
+
+                    <th>Email</th>
+
+                    @*<th>Giới tính</th>*@
+
+                    <th>Địa chỉ</th>
+
+                    <th>Hành động</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+
+                {
+
+                    <tr>
+
+                        <td>@item.FullName</td>
+
+                        <td>@item.Email</td>
+
+                        @*@(item.Gender == true ? "Nam" : "Nữ")*@
+
+                        <td>@item.Address</td>
+
+                        <td>
+
+                            @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |
+
+                            @Html.ActionLink("Sửa quyền", "EditRole", new { Id = item.Id }, null) |
+
+                            @Html.ActionLink("Xóa", "Delete", new { Id = item.Id }, null)
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+

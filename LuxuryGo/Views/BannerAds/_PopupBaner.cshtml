@@ -1,0 +1,9 @@
+﻿@model LuxuryGo.Models.Entities.Banner
+    
+@if (Model != null)
+{
+    <div class="bannerPopup">
+        @Html.Raw(Model.Content)
+    </div>
+}
+

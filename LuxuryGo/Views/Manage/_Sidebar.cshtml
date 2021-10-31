@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LuxuryGo.Models.Entities.Post>
+@using LuxuryGo.Models.Entities
+@using Commons.Libs
+
+
+    @{ var user = System.Web.HttpContext.Current.User.Identity.Name; }
+<div class="t3-module module" id="Mod89">
+    <div class="module-inner">
+        <div class="module-ct">
+            <div class="eshop-category">
+                <strong>@user</strong>
+            </div>
+            </div>
+                <div class="module-ct">
+                    <div class="eshop-category">
+                        <ul>
+
+                            <li>
+                                <a href="#" title="THÔNG TIN TÀI KHOẢN">
+                                    <strong>THÔNG TIN TÀI KHOẢN</strong>
+                                </a>
+                            </li>
+
+
+
+                            <li>
+                                <a href="#" title="ĐỔI MẬT KHẨU">
+                                    <strong>ĐỔI MẬT KHẨU</strong>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="#" title="QUẢN LÝ ĐƠN HÀNG">
+                                    <strong>QUẢN LÝ ĐƠN HÀNG</strong>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div><!-- /.sidebar-widget-body -->
+                </div><!-- /.sidebar-widget -->
+            </div>
+        </div>

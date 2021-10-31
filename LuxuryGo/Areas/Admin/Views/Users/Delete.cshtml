@@ -1,0 +1,66 @@
+﻿@model LuxuryGo.Models.ApplicationUser
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+@{
+
+    ViewBag.Title = "Xóa thành viên";
+
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+
+}
+
+<div class="row">
+
+    <div class="col-sm-12">
+
+        @if (Request.IsAuthenticated)
+        {
+            var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userRoles = userManager.GetRoles(Model.Id);
+            bool isAdmin = false;
+
+            
+            {
+                foreach (var @item in userRoles)
+                {
+
+                    if (item.ToString() == "Admin")
+                    {
+                        isAdmin = true;
+                    }
+                }
+            }
+
+
+
+
+            if (isAdmin == true)
+            {
+                <h5>Không thể xóa admin. Vui lòng gỡ quyền admin trước khi xóa</h5>
+            }
+            else
+            {
+                <div class="text-center">
+                    <h5>Bạn có chắc muốn xóa thành viên @Model.Email?</h5>
+
+                    @using (Html.BeginForm())
+
+                    {
+
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                        <button type="submit" class="btn btn-primary">Chấp nhận</button>
+
+                        <a href="@Url.Action("Index")" class="btn btn-default">Không xóa</a>
+
+                    }
+                </div>
+            }
+        }
+        <hr />
+    </div>
+
+</div>
